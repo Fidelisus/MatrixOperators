@@ -1,0 +1,28 @@
+CC = g++  -Wall -pedantic
+
+
+all: Matrix.o MatrixData.o WrongDimensions.o WrongInitializingArray.o IndexOutOfRange.o TestMatrix.o
+	$(CC) Matrix.o MatrixData.o WrongDimensions.o WrongInitializingArray.o IndexOutOfRange.o TestMatrix.o
+
+TestMatrix.o: TestMatrix.cpp Matrix.h
+	$(CC) TestMatrix.cpp
+
+Matrix.o: Matrix.cpp Matrix.h WrongInitializingArray.h WrongDimensions.h IndexOutOfRange.h MatrixData.h
+	$(CC) Matrix.cpp
+
+MatrixData.o : MatrixData.cpp MatrixData.h WrongInitializingArray.h
+	$(CC) MatrixData.cpp 
+
+WrongDimensions.o: WrongDimensions.cpp WrongDimensions.h
+	$(CC) WrongDimensions.cpp 
+
+WrongInitializingArray.o: WrongInitializingArray.cpp WrongInitializingArray.h
+	$(CC) WrongInitializingArray.cpp 
+
+IndexOutOfRange.o: IndexOutOfRange.cpp IndexOutOfRange.h
+	$(CC) IndexOutOfRange.cpp
+
+clean:
+	rm -f *.o main
+
+# g++  -Wall -pedantic -o main TestMatrix.cpp Matrix.cpp MatrixData.cpp WrongDimensions.cpp WrongInitializingArray.cpp IndexOutOfRange.cpp
